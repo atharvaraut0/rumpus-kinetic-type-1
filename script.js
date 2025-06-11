@@ -1,6 +1,6 @@
 let pg;
 let ivory, delvard, eugenio;
-let cnv;                    // ← new
+let cnv;                    
 
 function preload() {
   ivory   = loadFont('./Fonts/IvoryDisplayTrialTT-Bold.ttf');
@@ -9,8 +9,8 @@ function preload() {
 }
 
 function setup() {
-  cnv = createCanvas(1440, 300, P2D); // keep your size
-  cnv.parent('kinetic-type');         // ← move canvas inside the div
+  cnv = createCanvas(1440, 300, P2D); 
+  cnv.parent('kinetic-type');         
   pg  = createGraphics(1440, 300, P2D);
   frameRate(30);
 }
