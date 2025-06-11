@@ -1,0 +1,17 @@
+body {
+    /* background-color: blue; */
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    /* justify-content: center;
+    align-items: center; */
+  }
+  
+  #kinetic-type {
+    width: 100vw;
+    height: 80vh;
+    /* background-color: red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
