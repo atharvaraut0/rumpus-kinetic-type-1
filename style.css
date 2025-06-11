@@ -84,7 +84,7 @@ body {
   appearance: none;
   width: 0.7vw;
   height: 0.7vw;
-  background: rgb(3, 48, 3);
+  background: rgb(139, 2, 2);
   cursor: pointer;
 }
 
@@ -94,7 +94,7 @@ body {
   font-weight: 700;
   /* text-transform: uppercase; */
   text-align: center;
-  color:  rgb(22, 139, 22);
+  color:  rgb(184, 36, 36);
 }
 
 

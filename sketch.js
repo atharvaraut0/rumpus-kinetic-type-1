@@ -14,9 +14,9 @@ function preload() {
 }
 
 function setup() {
-  cnv = createCanvas(1440, 300, P2D); 
+  cnv = createCanvas(1920, 300, P2D); 
   cnv.parent('kinetic-type');         
-  pg  = createGraphics(1440, 300, P2D);
+  pg  = createGraphics(1920, 300, P2D);
   frameRate(30);
 
   // Setup live slider display updates
@@ -66,7 +66,7 @@ function draw() {
     pg.background(255);
     pg.fill(0);
     pg.textFont(eugenio);
-    pg.textSize(220);
+    pg.textSize(200);
     pg.textAlign(CENTER, CENTER);
     pg.text(mainText, width / 2, height / 2);
     
