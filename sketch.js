@@ -66,7 +66,7 @@ function draw() {
     pg.background(255);
     pg.fill(0);
     pg.textFont(eugenio);
-    pg.textSize(200);
+    pg.textSize(210);
     pg.textAlign(CENTER, CENTER);
     pg.text(mainText, width / 2, height / 2);
     
