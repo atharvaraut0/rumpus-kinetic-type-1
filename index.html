@@ -6,11 +6,44 @@
     <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
     <title>Rumpus Type Treatment</title>
     <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="container">
+        <div id="slider-controls">
+            <div class="slider-packets">
+                <label class="slider-label">Main Amplitude</label>
+                <input type="range" class="slider" min="0" max="100" id="main-amp" value="50">
+                <span class="slider-value" id="main-amp-val"></span>
+            </div>
+            
+            <div class="slider-packets">
+                <label class="slider-label">Ambient Amplitude</label>
+                <input type="range" class="slider" min="0" max="20" id="amb-amp" value="9">
+                <span class="slider-value" id="amb-amp-val"></span>
+            </div>
+
+            <div class="slider-packets">
+                <label class="slider-label">Tiles</label>
+                <input type="range" class="slider" min="50" max="150" id="tiles" value="120">
+                <span class="slider-value" id="tiles-val"></span>
+            </div>
+
+            <div class="slider-packets">
+                <label class="slider-label">Mouse Affector</label>
+                <input type="range" class="slider" min="80" max="200" id="mouse-affector" value="120">
+                <span class="slider-value" id="mouse-affector-val"></span>
+            </div>
+
+            <div class="text-packets">
+                <label class="slider-label">Text(Case Sensitive)</label>
+                <input class="slider-value" type="text" id="main-text" name="fname" value="The Rumpus">
+            </div>
+        </div>
         <div id="kinetic-type">
-            <script id="type" src="./script.js"></script> 
+            <script id="type" src="./sketch.js"></script> 
         </div>
     </div>
 </body>
