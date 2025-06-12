@@ -195,11 +195,13 @@
 
   font-family: 'IBM Plex Mono';
   color: black;
+  padding-left: 0.4vw;
  }
 
  .options:hover {
   opacity:1;
  }
+
 
  #footnote {
   display: flex;
