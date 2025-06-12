@@ -134,6 +134,7 @@
    justify-content: center;
    align-self: baseline;
    margin-bottom: 0;
+   gap: 1vw;
  }
 
  .text-packets {
@@ -168,4 +169,12 @@
    font-weight: 400;
    font-size: 0.6vw;
    color: rgb(100, 100, 100);
+ }
+
+ #text-sliders{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  
  }

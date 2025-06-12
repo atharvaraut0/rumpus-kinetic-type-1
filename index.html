@@ -51,6 +51,20 @@
                 <label for="main-text" class="text-label">Text(Case Sensitive)</label>
                 <textarea class="text-value" id="main-text" name="main-text" rows="3" cols="25">The Rumpus</textarea>
             </div>
+
+            <div id="text-sliders">
+                <div class="slider-packets">
+                    <label for="leading" class="slider-label">Text Leading</label>
+                    <input type="range" class="slider" min="80" max="150" id="leading" name="leading" value="120">
+                    <span class="slider-value" id="leading-val"></span>
+                </div>
+
+                <div class="slider-packets">
+                    <label for="font-size" class="slider-label">Font Size</label>
+                    <input type="range" class="slider" min="100" max="300" id="font-size" name="font-size" value="210">
+                    <span class="slider-value" id="font-size-val"></span>
+                </div>
+            </div>
         </div>
     </div>
 </body>

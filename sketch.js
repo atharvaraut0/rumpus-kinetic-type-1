@@ -24,7 +24,9 @@ function setup() {
     { id: 'main-amp' },
     { id: 'amb-amp' },
     { id: 'tiles' },
-    { id: 'mouse-affector' }
+    { id: 'mouse-affector' },
+    { id: 'leading'},
+    { id: 'font-size'}
   ];
 
   sliders.forEach(({ id }) => {
@@ -57,6 +59,8 @@ function draw() {
   let tiles = +document.getElementById("tiles").value * 3;
   let mouseDist = +document.getElementById("mouse-affector").value;
   let mainText = document.getElementById("main-text").value;
+  let leadingValue = +document.getElementById("leading").value;
+  let fontSize = +document.getElementById("font-size").value;
 
   //tiles *= 3;
   //console.log(mouseDist);
@@ -66,9 +70,9 @@ function draw() {
   pg.background(255);
   pg.fill(0);
   pg.textFont(eugenio);
-  pg.textSize(210);
+  pg.textSize(fontSize);
   pg.textAlign(CENTER, CENTER);
-  pg.textLeading(120);
+  pg.textLeading(leadingValue);
   pg.text(mainText, width / 2, height / 2);
 
   let tilesX = tiles;
