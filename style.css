@@ -47,8 +47,6 @@
    margin: 0;
    height: 100vh;
    display: flex;
-   /* justify-content: center;
-    align-items: center; */
    /* overflow: hidden; */
  }
 
@@ -177,4 +175,15 @@
   align-items: flex-end;
   justify-content: flex-end;
   
+ }
+
+ #footnote {
+  display: flex;
+  justify-content: center;
+  padding-top: 1.7vw;
+
+  font-family: 'IBM Plex Mono';
+  font-size: 0.55vw;
+  font-weight: 400;
+  color: rgb(100, 100, 100);
  }

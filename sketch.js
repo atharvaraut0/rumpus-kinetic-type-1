@@ -3,21 +3,88 @@ let pg;
 let ivory, delvard, eugenio;
 let cnv;
 
+//record setup
+let recording = false;
+let recorder;
+let chunks = [];
 
 
-// console.log(mainText);
 
+//Preload Text///////////////////////////////////////////////////////////////
 function preload() {
   ivory = loadFont('./Fonts/IvoryDisplayTrialTT-Bold.ttf');
   delvard = loadFont('./Fonts/DelvardSerifDisplayxsTRIAL-Semibold.otf');
   eugenio = loadFont('./Fonts/EugenioSerifPoster-BlackItalic-Trial.otf');
 }
 
+//Recording Setup///////////////////////////////////////////////////////////
+function record() {
+  chunks.length = 0;
+
+  let stream = document.querySelector('canvas').captureStream(30);
+
+  if (!MediaRecorder.isTypeSupported('video/webm; codecs="vp9"')) {
+    console.warn("VP9 not supported. Falling back.");
+  }
+
+  recorder = new MediaRecorder(stream, {
+    mimeType: 'video/webm; codecs="vp9"',
+    videoBitsPerSecond: 30_000_000
+  });
+
+  recorder.ondataavailable = e => {
+    if (e.data.size) {
+      chunks.push(e.data);
+    }
+  };
+
+  recorder.onstop = exportVideo;
+}
+
+function exportVideo(e) {
+  var blob = new Blob(chunks, { 'type' : 'video/webm' });
+
+    // Draw video to screen
+    var videoElement = document.createElement('video');
+    videoElement.setAttribute("id", Date.now());
+    videoElement.controls = true;
+    document.body.appendChild(videoElement);
+    videoElement.src = window.URL.createObjectURL(blob);
+  
+  // Download the video 
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  document.body.appendChild(a);
+  a.style = 'display: none';
+  a.href = url;
+  a.download = 'a-beautiful-video.webm';
+  a.click();
+  window.URL.revokeObjectURL(url);
+
+}
+
+function keyPressed() {
+  if (key === 'r' || key === 'R') {
+    recording = !recording;
+    if (recording) {
+      console.log("Recording started!");
+      recorder.start();
+    } else {
+      console.log("Recording stopped!");
+      recorder.stop();
+    }
+  }
+}
+
+//Main Sketch Setup////////////////////////////////////////////////////////////
+
 function setup() {
   cnv = createCanvas(1920, 600, P2D);
   cnv.parent('kinetic-type');
   pg = createGraphics(1920, 600, P2D);
   frameRate(30);
+
+  record();
 
   // Setup live slider display updates
   const sliders = [
@@ -50,6 +117,18 @@ function setup() {
   });
 }
 
+function keyPressed() {
+  if (key === 'r' || key === 'R') {
+    recording = !recording;
+    if (recording) {
+      console.log("Recording started!");
+      recorder.start();
+    } else {
+      console.log("Recording stopped!");
+      recorder.stop();
+    }
+  }
+}
 
 function draw() {
 
