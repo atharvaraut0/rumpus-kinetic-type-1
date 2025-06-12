@@ -1,6 +1,6 @@
 //Env Setup
 let pg;
-let ivory, delvard, eugenio;
+let ivoryMedium, ivoryBold, ivoryItalic, eugenio;
 let cnv;
 
 //record setup
@@ -12,8 +12,9 @@ let chunks = [];
 
 //Preload Text///////////////////////////////////////////////////////////////
 function preload() {
-  ivory = loadFont('./Fonts/IvoryDisplayTrialTT-Medium.ttf');
-  delvard = loadFont('./Fonts/DelvardSerifDisplayxsTRIAL-Semibold.otf');
+  ivoryMedium = loadFont('./Fonts/IvoryDisplayTrialTT-Medium.ttf');
+  ivoryBold = loadFont('./Fonts/IvoryDisplayTrialTT-Bold.ttf');
+  ivoryItalic = loadFont('./Fonts/IvoryDisplayTrialTT-BoldItalic.ttf');
   eugenio = loadFont('./Fonts/EugenioSerifPoster-BlackItalic-Trial.otf');
 }
 
@@ -140,19 +141,50 @@ function draw() {
   let mainText = document.getElementById("main-text").value;
   let leadingValue = +document.getElementById("leading").value;
   let fontSize = +document.getElementById("font-size").value;
-
-  //tiles *= 3;
-  //console.log(mouseDist);
+  let fontSelect = document.getElementById("fonts-select").value;
+  let alignSelect = document.getElementById("align-select").value;
 
   background(255);
 
   pg.background(255);
   pg.fill(0);
-  pg.textFont(ivory);
+  
+  let font;
+  switch (fontSelect) {
+    case 'ivoryMedium': font = ivoryMedium; break;
+    case 'ivoryBold': font = ivoryBold; break;
+    case 'ivoryItalic': font = ivoryItalic; break;
+    case 'eugenio': font = eugenio; break;
+    default: font = eugenio; break; 
+  }
+
+  let align;
+  switch (alignSelect) {
+    case 'left': align = LEFT; break;
+    case 'right': align = RIGHT; break;
+    case 'center': align = CENTER; break;
+    default: align = CENTER; break;
+  }
+
+  let x;
+  switch (align) {
+    case LEFT:
+      x = width / 2 - pg.textWidth(mainText) / 2;
+      break;
+    case RIGHT:
+      x = width / 2 + pg.textWidth(mainText) / 2;
+      break;
+    case CENTER:
+    default:
+      x = width / 2;
+      break;
+  }
+
+  pg.textFont(font);
   pg.textSize(fontSize);
-  pg.textAlign(CENTER, CENTER);
+  pg.textAlign(align, CENTER);
   pg.textLeading(leadingValue);
-  pg.text(mainText, width / 2, height / 2);
+  pg.text(mainText, x, height / 2);
 
   let tilesX = tiles;
   let tilesY = Math.round((tilesX * height) / width);
