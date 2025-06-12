@@ -12,7 +12,7 @@ let chunks = [];
 
 //Preload Text///////////////////////////////////////////////////////////////
 function preload() {
-  ivory = loadFont('./Fonts/IvoryDisplayTrialTT-Bold.ttf');
+  ivory = loadFont('./Fonts/IvoryDisplayTrialTT-Medium.ttf');
   delvard = loadFont('./Fonts/DelvardSerifDisplayxsTRIAL-Semibold.otf');
   eugenio = loadFont('./Fonts/EugenioSerifPoster-BlackItalic-Trial.otf');
 }
@@ -148,7 +148,7 @@ function draw() {
 
   pg.background(255);
   pg.fill(0);
-  pg.textFont(eugenio);
+  pg.textFont(ivory);
   pg.textSize(fontSize);
   pg.textAlign(CENTER, CENTER);
   pg.textLeading(leadingValue);
