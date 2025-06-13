@@ -2,13 +2,15 @@
 let pg;
 let ivoryMedium, ivoryBold, ivoryItalic, eugenio;
 let cnv;
+let img;
 
 //record setup
 let recording = false;
 let recorder;
 let chunks = [];
 
-
+//Switcher
+let useImg = false;
 
 //Preload Text///////////////////////////////////////////////////////////////
 function preload() {
@@ -16,6 +18,7 @@ function preload() {
   ivoryBold = loadFont('./Fonts/IvoryDisplayTrialTT-Bold.ttf');
   ivoryItalic = loadFont('./Fonts/IvoryDisplayTrialTT-BoldItalic.ttf');
   eugenio = loadFont('./Fonts/EugenioSerifPoster-BlackItalic-Trial.otf');
+  img = loadImage('test img.png');
 }
 
 //Recording Setup///////////////////////////////////////////////////////////
@@ -64,18 +67,6 @@ function exportVideo(e) {
 
 }
 
-function keyPressed() {
-  if (key === 'r' || key === 'R') {
-    recording = !recording;
-    if (recording) {
-      console.log("Recording started!");
-      recorder.start();
-    } else {
-      console.log("Recording stopped!");
-      recorder.stop();
-    }
-  }
-}
 
 //Main Sketch Setup////////////////////////////////////////////////////////////
 
@@ -116,6 +107,36 @@ function setup() {
       display.textContent = slider.value;
     });
   });
+
+  //Switcher
+
+  let footer = document.getElementById("footer");
+  let imgFooter = document.getElementById("img-footer");
+  let switcher = document.getElementById("img-text-switch");
+
+  switcher.addEventListener("click", () => {
+    useImg = !useImg;
+    footer.style.display = useImg ? "none" : "flex";
+    imgFooter.style.display = useImg ? "flex" : "none";
+    switcher.style.backgroundColor = useImg ? "rgb(7, 131, 83)" : "grey";
+  });
+
+  //Image Upload
+
+  let imgUploadInput = document.getElementById("img-upload");
+
+  imgUploadInput.addEventListener("change", (e) => {
+    let file = e.target.files[0];
+    if (file && file.type.startsWith("image/")) {
+      let reader = new FileReader();
+      reader.onload = function (event) {
+        loadImage(event.target.result, loadedImg => {
+          img = loadedImg; // Replace the default image
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  });
 }
 
 function keyPressed() {
@@ -130,6 +151,7 @@ function keyPressed() {
     }
   }
 }
+
 
 function draw() {
 
@@ -148,44 +170,56 @@ function draw() {
 
   pg.background(255);
   pg.fill(0);
-  
-  let font;
-  switch (fontSelect) {
-    case 'ivoryMedium': font = ivoryMedium; break;
-    case 'ivoryBold': font = ivoryBold; break;
-    case 'ivoryItalic': font = ivoryItalic; break;
-    case 'eugenio': font = eugenio; break;
-    default: font = eugenio; break; 
+
+  console.log(useImg);
+
+  if (useImg) {
+
+    let scaledWidth = pg.height * (img.width / img.height);
+    let xOffset = (pg.width - scaledWidth) / 2;
+    pg.image(img, xOffset, 0, 600 * img.width / img.height, 600);
+
+  } else {
+
+    let font;
+    switch (fontSelect) {
+      case 'ivoryMedium': font = ivoryMedium; break;
+      case 'ivoryBold': font = ivoryBold; break;
+      case 'ivoryItalic': font = ivoryItalic; break;
+      case 'eugenio': font = eugenio; break;
+      default: font = eugenio; break;
+    }
+
+    let align;
+    switch (alignSelect) {
+      case 'left': align = LEFT; break;
+      case 'right': align = RIGHT; break;
+      case 'center': align = CENTER; break;
+      default: align = CENTER; break;
+    }
+
+    let x;
+    switch (align) {
+      case LEFT:
+        x = width / 2 - pg.textWidth(mainText) / 2;
+        break;
+      case RIGHT:
+        x = width / 2 + pg.textWidth(mainText) / 2;
+        break;
+      case CENTER:
+      default:
+        x = width / 2;
+        break;
+    }
+
+    pg.textFont(font);
+    pg.textSize(fontSize);
+    pg.textAlign(align, CENTER);
+    pg.textLeading(leadingValue);
+    pg.text(mainText, x, height / 2);
   }
 
-  let align;
-  switch (alignSelect) {
-    case 'left': align = LEFT; break;
-    case 'right': align = RIGHT; break;
-    case 'center': align = CENTER; break;
-    default: align = CENTER; break;
-  }
-
-  let x;
-  switch (align) {
-    case LEFT:
-      x = width / 2 - pg.textWidth(mainText) / 2;
-      break;
-    case RIGHT:
-      x = width / 2 + pg.textWidth(mainText) / 2;
-      break;
-    case CENTER:
-    default:
-      x = width / 2;
-      break;
-  }
-
-  pg.textFont(font);
-  pg.textSize(fontSize);
-  pg.textAlign(align, CENTER);
-  pg.textLeading(leadingValue);
-  pg.text(mainText, x, height / 2);
-
+  //Set up tiles
   let tilesX = tiles;
   let tilesY = Math.round((tilesX * height) / width);
   let tileW = (width / tilesX);

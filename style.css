@@ -113,6 +113,22 @@
    color: rgb(28, 172, 100);
  }
 
+ #img-text-switch {
+  border-radius: 0;
+  width: 5vw;
+  background-color: grey;
+  color: whitesmoke;
+  font-family: 'IBM Plex Mono';
+  font-size: 0.65vw;
+  font-weight: 400;
+  text-align: center;
+  opacity: 0.7;
+ }
+
+ #img-text-switch:hover {
+  opacity:1;
+ }
+
 
 
  /************** End Slider Styles **************/
@@ -126,6 +142,33 @@
    justify-content: center;
    align-items: center;
  }
+
+
+
+ /************** Footer Styles **************/
+
+ #img-footer {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 2%;
+ }
+
+.upload-input {
+  font-family: 'IBM Plex Mono', monospace;
+  background-color: #e0e0e0;
+  color: black;
+  border: none;
+  border-radius: 0;
+  padding: 6px 10px;
+  cursor: pointer;
+  opacity: 0.8;
+  box-sizing: border-box;
+}
+
+.upload-input:hover {
+  opacity: 1;
+}
 
  #footer {
    display: flex;
