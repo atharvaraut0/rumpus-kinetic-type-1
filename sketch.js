@@ -9,8 +9,10 @@ let recording = false;
 let recorder;
 let chunks = [];
 
-//Switcher
+//Switchers
 let useImg = false;
+let fillCanvas = false;
+let imgWhiteBg = false;
 
 //Preload Text///////////////////////////////////////////////////////////////
 function preload() {
@@ -108,7 +110,7 @@ function setup() {
     });
   });
 
-  //Switcher
+  //Switchers
 
   let footer = document.getElementById("footer");
   let imgFooter = document.getElementById("img-footer");
@@ -120,6 +122,20 @@ function setup() {
     imgFooter.style.display = useImg ? "flex" : "none";
     switcher.style.backgroundColor = useImg ? "rgb(7, 131, 83)" : "grey";
   });
+
+  let canvasSwitcher = document.getElementById("img-fill-canvas");
+
+  canvasSwitcher.addEventListener("click", () => {
+    fillCanvas = !fillCanvas;
+    canvasSwitcher.style.backgroundColor = fillCanvas ? "rgb(7, 131, 83)" : "grey";
+  });
+
+  let bgSwitcher = document.getElementById("img-white-bg");
+
+  bgSwitcher.addEventListener("click", () => {
+    imgWhiteBg = !imgWhiteBg;
+    bgSwitcher.style.backgroundColor = imgWhiteBg ? "rgb(7, 131, 83)" : "grey";
+  })
 
   //Image Upload
 
@@ -176,8 +192,16 @@ function draw() {
   if (useImg) {
 
     let scaledWidth = pg.height * (img.width / img.height);
+    let scaledHeight = pg.width * (img.height / img.width);
     let xOffset = (pg.width - scaledWidth) / 2;
-    pg.image(img, xOffset, 0, 600 * img.width / img.height, 600);
+    let yOffset = (pg.height - scaledHeight) / 2;
+
+    if(fillCanvas) {
+      pg.image(img, 0, yOffset, 1920, 1920 * img.height / img.width);
+    } else {
+      pg.image(img, xOffset, 0, 600 * img.width / img.height, 600);
+    }
+    
 
   } else {
 
@@ -263,7 +287,7 @@ function draw() {
 
       //Assign Displacements
 
-      if(useImg) {
+      if(useImg && imgWhiteBg === false) {
         sx += wave;
       } else {
         dx += wave;
