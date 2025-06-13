@@ -88,7 +88,8 @@ function setup() {
     { id: 'mouse-affector' },
     { id: 'leading'},
     { id: 'font-size'},
-    { id: 'offset'}
+    { id: 'offset'},
+    { id: 'speed'}
   ];
 
   sliders.forEach(({ id }) => {
@@ -183,6 +184,7 @@ function draw() {
   let fontSelect = document.getElementById("fonts-select").value;
   let alignSelect = document.getElementById("align-select").value;
   let offsetMultiplier = +document.getElementById("offset").value;
+  let speedMultiplier = +document.getElementById("speed").value * 0.02;
 
   background(255);
 
@@ -250,7 +252,7 @@ function draw() {
   let tilesY = Math.round((tilesX * height) / width);
   let tileW = (width / tilesX);
   let tileH = (height / tilesY);
-  let maxDist = mouseDist + cos(frameCount * 0.1) * 60;
+  let maxDist = mouseDist + cos(frameCount * speedMultiplier) * 60;
   let maxAmbDist = mouseDist * 5.5;
 
   for (let y = 0; y < tilesY; y++) {
@@ -284,8 +286,8 @@ function draw() {
       distance = map(distance, 0, maxDist, 1, 0);
 
       //Calculate Displacements
-      wave = int(sin(frameCount * 0.1 + (x + y) * offsetMultiplier * 0.1) * mainAmp * distance);
-      ambient = (sin(frameCount * 0.2 + floor((x + y) / 2) * offsetMultiplier) * ambAmp * ambDist);
+      wave = int(sin(frameCount * speedMultiplier + (x + y) * offsetMultiplier * 0.1) * mainAmp * distance);
+      ambient = (sin(frameCount * speedMultiplier * 2 + floor((x + y) / 2) * offsetMultiplier) * ambAmp * ambDist);
 
       //Assign Displacements
 
