@@ -52,13 +52,13 @@
    /* overflow: hidden; */
  }
 
- #container {
-  /* background-color: blue; */
-  /* display: flex;
+ /* #container {
+  background-color: blue; 
+  display: flex;
   flex-direction: column;
   height: 100vh;
-  flex: 1; */
- }
+  flex: 1;
+ } */
 
 
 
@@ -68,7 +68,7 @@
  #slider-controls {
    margin-top: 1%;
    /* height: 5%; */
-   //background-color: red;
+   /* background-color: red; */
    display: flex;
    justify-content: center;
    gap: 4%;
@@ -91,7 +91,7 @@
 
  /* Base slider track */
  .slider {
-   -webkit-appearance: none;
+   appearance: none;
    width: 7vw;
    height: 0.7vw;
    background: #d3d3d3;

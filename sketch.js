@@ -87,7 +87,8 @@ function setup() {
     { id: 'tiles' },
     { id: 'mouse-affector' },
     { id: 'leading'},
-    { id: 'font-size'}
+    { id: 'font-size'},
+    { id: 'offset'}
   ];
 
   sliders.forEach(({ id }) => {
@@ -181,6 +182,7 @@ function draw() {
   let fontSize = +document.getElementById("font-size").value;
   let fontSelect = document.getElementById("fonts-select").value;
   let alignSelect = document.getElementById("align-select").value;
+  let offsetMultiplier = +document.getElementById("offset").value;
 
   background(255);
 
@@ -282,8 +284,8 @@ function draw() {
       distance = map(distance, 0, maxDist, 1, 0);
 
       //Calculate Displacements
-      wave = int(sin(frameCount * 0.1 + (x + y) * 0.2) * mainAmp * distance);
-      ambient = (sin(frameCount * 0.2 + floor((x + y) / 2) * 2) * ambAmp * ambDist);
+      wave = int(sin(frameCount * 0.1 + (x + y) * offsetMultiplier * 0.1) * mainAmp * distance);
+      ambient = (sin(frameCount * 0.2 + floor((x + y) / 2) * offsetMultiplier) * ambAmp * ambDist);
 
       //Assign Displacements
 
