@@ -262,7 +262,13 @@ function draw() {
       ambient = (sin(frameCount * 0.2 + floor((x + y) / 2) * 2) * ambAmp * ambDist);
 
       //Assign Displacements
-      dx += wave;
+
+      if(useImg) {
+        sx += wave;
+      } else {
+        dx += wave;
+      }
+      
       sw += ambient;
 
       // Final Copy //
