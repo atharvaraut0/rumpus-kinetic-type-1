@@ -252,7 +252,7 @@ function draw() {
   let tilesY = Math.round((tilesX * height) / width);
   let tileW = (width / tilesX);
   let tileH = (height / tilesY);
-  let maxDist = mouseDist + cos(frameCount * speedMultiplier) * 60;
+  let maxDist = mouseDist + cos(frameCount * speedMultiplier) * (mouseDist / 2);
   let maxAmbDist = mouseDist * 5.5;
 
   for (let y = 0; y < tilesY; y++) {
