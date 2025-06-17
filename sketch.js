@@ -75,7 +75,7 @@ function exportVideo(e) {
 function setup() {
   cnv = createCanvas(windowWidth, int(windowHeight / 1.7), P2D);
   cnv.parent('kinetic-type');
-  pg = createGraphics(windowWidth, int(windowHeight / 1.7), P2D);
+  pg = createGraphics(width, height, P2D);
   frameRate(30);
 
   record();
@@ -191,8 +191,6 @@ function draw() {
   pg.background(255);
   pg.fill(0);
 
-  console.log(useImg);
-
   if (useImg) {
 
     let scaledWidth = pg.height * (img.width / img.height);
@@ -285,24 +283,41 @@ function draw() {
       distance = constrain(distance, 0, maxDist);
       distance = map(distance, 0, maxDist, 1, 0);
 
-      //Calculate Displacements
-      wave = int(sin(frameCount * speedMultiplier + (x + y) * offsetMultiplier * 0.1) * mainAmp * distance);
-      ambient = (sin(frameCount * speedMultiplier * 2 + floor((x + y) / 2) * offsetMultiplier) * ambAmp * ambDist);
-
       //Assign Displacements
 
+      wave = int(sin(frameCount * speedMultiplier + (x + y) * offsetMultiplier * 0.1) * mainAmp * distance);
+
       if(useImg && imgWhiteBg === false) {
-        sx += wave;
-        sw += ambient;
+
+        ambient = (sin(frameCount * speedMultiplier + floor(x + y) * offsetMultiplier) * ambAmp * distance);
+
+        sx += ambient;
+
       } else {
+
+        ambient = (sin(frameCount * speedMultiplier * 2 + floor((x + y) / 2) * offsetMultiplier) * ambAmp * ambDist);
+
         dx += wave;
         sw += ambient;
       }
-      
-      
 
       // Final Copy //
       copy(pg, sx, sy, sw, sh, dx, dy, dw, dh);
     }
+  }
+
+  //Maintain borders of image
+  if (useImg && fillCanvas === false) {
+    // Calculate scaled dimensions to determine the actual image area
+    let aspectRatio = img.width / img.height;
+    let scaledWidth = height * aspectRatio;
+    let xOffset = (width - scaledWidth) / 2;
+
+    noStroke();
+    fill(255); // white
+
+    // Draw white rects on the left and right of the image
+    rect(0, 0, xOffset, height);
+    rect(width - xOffset, 0, xOffset, height);
   }
 }
