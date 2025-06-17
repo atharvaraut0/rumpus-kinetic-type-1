@@ -73,9 +73,9 @@ function exportVideo(e) {
 //Main Sketch Setup////////////////////////////////////////////////////////////
 
 function setup() {
-  cnv = createCanvas(1920, 600, P2D);
+  cnv = createCanvas(windowWidth, int(windowHeight / 1.7), P2D);
   cnv.parent('kinetic-type');
-  pg = createGraphics(1920, 600, P2D);
+  pg = createGraphics(windowWidth, int(windowHeight / 1.7), P2D);
   frameRate(30);
 
   record();
@@ -201,9 +201,9 @@ function draw() {
     let yOffset = (pg.height - scaledHeight) / 2;
 
     if(fillCanvas) {
-      pg.image(img, 0, yOffset, 1920, 1920 * img.height / img.width);
+      pg.image(img, 0, yOffset, width, width * img.height / img.width);
     } else {
-      pg.image(img, xOffset, 0, 600 * img.width / img.height, 600);
+      pg.image(img, xOffset, 0, height * img.width / img.height, height);
     }
     
 
@@ -293,11 +293,13 @@ function draw() {
 
       if(useImg && imgWhiteBg === false) {
         sx += wave;
+        sw += ambient;
       } else {
         dx += wave;
+        sw += ambient;
       }
       
-      sw += ambient;
+      
 
       // Final Copy //
       copy(pg, sx, sy, sw, sh, dx, dy, dw, dh);

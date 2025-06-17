@@ -294,3 +294,21 @@
    font-weight: 400;
    color: rgb(100, 100, 100);
  }
+
+/* ////////////////////Prevent Shrink//////////////////////////////// */
+
+ .slider-label,
+ .slider-value,
+ .text-label,
+ .options,
+ #img-white-bg,
+ #img-fill-canvas,
+ #img-text-switch,
+ #main-text {
+   font-size: clamp(10px, 0.7vw, 14px);
+ }
+
+
+ #container {
+   min-width: 540px;
+ }
