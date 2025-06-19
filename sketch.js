@@ -48,15 +48,15 @@ function record() {
 }
 
 function exportVideo(e) {
-  var blob = new Blob(chunks, { 'type' : 'video/webm' });
+  var blob = new Blob(chunks, { 'type': 'video/webm' });
 
-    // Draw video to screen
-    var videoElement = document.createElement('video');
-    videoElement.setAttribute("id", Date.now());
-    videoElement.controls = true;
-    document.body.appendChild(videoElement);
-    videoElement.src = window.URL.createObjectURL(blob);
-  
+  // Draw video to screen
+  var videoElement = document.createElement('video');
+  videoElement.setAttribute("id", Date.now());
+  videoElement.controls = true;
+  document.body.appendChild(videoElement);
+  videoElement.src = window.URL.createObjectURL(blob);
+
   // Download the video 
   var url = URL.createObjectURL(blob);
   var a = document.createElement('a');
@@ -86,10 +86,10 @@ function setup() {
     { id: 'amb-amp' },
     { id: 'tiles' },
     { id: 'mouse-affector' },
-    { id: 'leading'},
-    { id: 'font-size'},
-    { id: 'offset'},
-    { id: 'speed'}
+    { id: 'leading' },
+    { id: 'font-size' },
+    { id: 'offset' },
+    { id: 'speed' }
   ];
 
   sliders.forEach(({ id }) => {
@@ -198,12 +198,12 @@ function draw() {
     let xOffset = (pg.width - scaledWidth) / 2;
     let yOffset = (pg.height - scaledHeight) / 2;
 
-    if(fillCanvas) {
+    if (fillCanvas) {
       pg.image(img, 0, yOffset, width, width * img.height / img.width);
     } else {
       pg.image(img, xOffset, 0, height * img.width / img.height, height);
     }
-    
+
 
   } else {
 
@@ -287,7 +287,7 @@ function draw() {
 
       wave = int(sin(frameCount * speedMultiplier + (x + y) * offsetMultiplier * 0.1) * mainAmp * distance);
 
-      if(useImg && imgWhiteBg === false) {
+      if (useImg && imgWhiteBg === false) {
 
         ambient = (sin(frameCount * speedMultiplier + floor(x + y) * offsetMultiplier) * ambAmp * distance);
 
@@ -295,7 +295,7 @@ function draw() {
 
       } else {
 
-        ambient = (sin(frameCount * speedMultiplier * 2 + floor((x + y) / 2) * offsetMultiplier) * ambAmp * ambDist);
+        ambient = (sin(frameCount * speedMultiplier * 2 + floor((x + y) / (height / width)) * offsetMultiplier) * ambAmp * ambDist);
 
         dx += wave;
         sw += ambient;
