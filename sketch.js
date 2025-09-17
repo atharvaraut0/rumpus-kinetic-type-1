@@ -16,7 +16,7 @@ let imgWhiteBg = false;
 
 //Preload Text///////////////////////////////////////////////////////////////
 function preload() {
-  ivoryMedium = loadFont('./Fonts/IvoryDisplayTrialTT-Medium.ttf');
+  ivoryMedium = loadFont('./Fonts/IvoryDisplayLL-Medium.otf');
   ivoryBold = loadFont('./Fonts/IvoryDisplayTrialTT-Bold.ttf');
   ivoryItalic = loadFont('./Fonts/IvoryDisplayTrialTT-BoldItalic.ttf');
   eugenio = loadFont('./Fonts/EugenioSerifPoster-BlackItalic-Trial.otf');
@@ -73,7 +73,7 @@ function exportVideo(e) {
 //Main Sketch Setup////////////////////////////////////////////////////////////
 
 function setup() {
-  cnv = createCanvas(windowWidth, int(windowHeight / 1.7), P2D);
+  cnv = createCanvas(windowWidth, int(windowHeight / 1.4), P2D);
   cnv.parent('kinetic-type');
   pg = createGraphics(width, height, P2D);
   frameRate(30);
@@ -122,21 +122,24 @@ function setup() {
     useImg = !useImg;
     footer.style.display = useImg ? "none" : "flex";
     imgFooter.style.display = useImg ? "flex" : "none";
-    switcher.style.backgroundColor = useImg ? "rgb(7, 131, 83)" : "grey";
+    switcher.style.backgroundColor = useImg ? "#FFCBD7" : "grey";
+    switcher.style.color = useImg ? "black" : "whitesmoke";
   });
 
   let canvasSwitcher = document.getElementById("img-fill-canvas");
 
   canvasSwitcher.addEventListener("click", () => {
     fillCanvas = !fillCanvas;
-    canvasSwitcher.style.backgroundColor = fillCanvas ? "rgb(7, 131, 83)" : "grey";
+    canvasSwitcher.style.backgroundColor = fillCanvas ? "#FFCBD7" : "grey";
+    canvasSwitcher.style.color = useImg ? "black" : "whitesmoke";
   });
 
   let bgSwitcher = document.getElementById("img-white-bg");
 
   bgSwitcher.addEventListener("click", () => {
     imgWhiteBg = !imgWhiteBg;
-    bgSwitcher.style.backgroundColor = imgWhiteBg ? "rgb(7, 131, 83)" : "grey";
+    bgSwitcher.style.backgroundColor = imgWhiteBg ? "#FFCBD7" : "grey";
+    bgSwitcher.style.color = useImg ? "black" : "whitesmoke";
   })
 
   //Image Upload
@@ -158,7 +161,7 @@ function setup() {
 }
 
 function keyPressed() {
-  if (key === 'r' || key === 'R') {
+  if (key === '`' || key === '/') {
     recording = !recording;
     if (recording) {
       console.log("Recording started!");

@@ -110,7 +110,7 @@
    appearance: none;
    width: 0.7vw;
    height: 0.7vw;
-   background: rgb(7, 131, 83);
+   background: #000000;
    cursor: pointer;
  }
 
@@ -120,7 +120,7 @@
    font-weight: 700;
    /* text-transform: uppercase; */
    text-align: center;
-   color: rgb(28, 172, 100);
+   color: #000000;
  }
 
  #img-text-switch {
