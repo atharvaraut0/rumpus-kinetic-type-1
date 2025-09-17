@@ -103,6 +103,7 @@
 
  .slider:hover {
    opacity: 1;
+   background-color: #FFCBD7;
  }
 
  .slider::-webkit-slider-thumb {
